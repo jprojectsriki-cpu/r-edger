@@ -578,7 +578,7 @@ html.furigana-off rt { display: none; }
 .footer-col a, .footer-col .link-btn { font-size: 0.82rem; color: var(--sub); text-decoration: none; }
 .footer-col a:hover, .footer-col .link-btn:hover { color: var(--cyan); text-decoration: underline; }
 .footer-bottom { max-width: 1152px; margin: 32px auto 0; padding-top: 18px; border-top: 1px solid var(--line); text-align: left; font-size: 0.72rem; color: var(--muted); line-height: 2.2; }
-.copyright { margin-top: 6px; font-family: var(--font-tech); letter-spacing: 0.08em; font-size: 0.75rem; text-align: right;}
+.copyright { margin-top: 6px; font-family: var(--font-tech); letter-spacing: 0.08em; font-size: 0.75rem; text-align: right; }
 
 .mobile-cta { display: none; }
 
