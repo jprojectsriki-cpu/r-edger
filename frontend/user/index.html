@@ -40,10 +40,10 @@
                     <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg>
                     ログイン
                 </button>
-                <a href="#pricing" class="game-btn game-btn-sm">
+                <button type="button" class="game-btn game-btn-sm" data-open="applyDialog">
                     <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
                     <span><ruby>新規<rt>しんき</rt></ruby><ruby>申込<rt>もうしこみ</rt></ruby></span>
-                </a>
+                </button>
             </div>
         </div>
 
@@ -63,7 +63,6 @@
         <!-- ================= HERO ================= -->
         <section class="hero">
             <div class="hero-copy reveal">
-                <span class="hero-tag">ZENKEI BOKI // LV.04・LV.03・LV.02</span>
                 <h1 class="hero-title">
                     <ruby>全経<rt>ぜんけい</rt></ruby><ruby>簿記<rt>ぼき</rt></ruby>を、<br>
                     <span class="grad"><ruby>戦略的<rt>せんりゃくてき</rt></ruby>な<ruby>学習法<rt>がくしゅうほう</rt></ruby></span><br>で<ruby>完全<rt>かんぜん</rt></ruby><ruby>制圧<rt>せいあつ</rt></ruby>せよ。
@@ -73,16 +72,12 @@
                     <ruby>無駄<rt>むだ</rt></ruby>を<ruby>削<rt>そ</rt></ruby>ぎ<ruby>落<rt>お</rt></ruby>とした<ruby>戦術<rt>せんじゅつ</rt></ruby>インターフェースで、<ruby>大問<rt>だいもん</rt></ruby><ruby>攻略<rt>こうりゃく</rt></ruby>・<ruby>合格<rt>ごうかく</rt></ruby>への<ruby>最短<rt>さいたん</rt></ruby>ルートを<ruby>演算<rt>えんざん</rt></ruby>する。
                 </p>
                 <div class="hero-cta">
-                    <a href="#pricing" class="game-btn game-btn-lg">
+                    <button type="button" class="game-btn game-btn-lg" data-open="applyDialog">
                         <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M16 11h6"/></svg>
                         <span><ruby>会員<rt>かいいん</rt></ruby><ruby>登録<rt>とうろく</rt></ruby>する</span>
-                    </a>
+                    </button>
                     <span class="hero-price"><ruby>各級<rt>かくきゅう</rt></ruby> <strong>¥1,500</strong>（<ruby>税込<rt>ぜいこみ</rt></ruby>）／<ruby>買<rt>か</rt></ruby>い<ruby>切<rt>き</rt></ruby>り</span>
                 </div>
-            </div>
-            <div class="hero-emblem reveal" aria-hidden="true">
-                <img src="img/logo.png" alt="" width="260" height="298">
-                <span class="hero-emblem-code">UNIT: R-EDGER // STATUS: READY</span>
             </div>
         </section>
 
@@ -91,14 +86,14 @@
             <div class="section-head reveal">
                 <span class="section-en orange">SELECT PLAN // PRICING</span>
                 <h2 class="section-title"><ruby>受講<rt>じゅこう</rt></ruby>プラン<ruby>選択<rt>せんたく</rt></ruby></h2>
-                <p class="section-note"><ruby>追加<rt>ついか</rt></ruby><ruby>課金<rt>かきん</rt></ruby>・<ruby>月額<rt>げつがく</rt></ruby>サブスクリプション<ruby>要素<rt>ようそ</rt></ruby>は<ruby>一切<rt>いっさい</rt></ruby>ありません。</p>
+                <p class="section-note"><ruby>追加<rt>ついか</rt></ruby><ruby>課金<rt>かきん</rt></ruby>・<ruby>月額<rt>げつがく</rt></ruby>サブスクリプションは<ruby>一切<rt>いっさい</rt></ruby>ありません。</p>
             </div>
 
             <form class="game-card featured price-card reveal" id="priceForm" data-game-id="SECTOR-03" novalidate>
                 <div class="price-top">
                     <svg class="plan-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 7v5c0 4.5 3.4 7.7 8 9 4.6-1.3 8-4.5 8-9V7z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></svg>
                     <span class="lv-badge" id="lvBadge">LV.03 ENTRY</span>
-                    <span class="price-grade-name"><span data-grade-name="4" hidden><ruby>全経<rt>ぜんけい</rt></ruby><ruby>簿記<rt>ぼき</rt></ruby>４<ruby>級<rt>きゅう</rt></ruby></span><span data-grade-name="3"><ruby>全経<rt>ぜんけい</rt></ruby><ruby>簿記<rt>ぼき</rt></ruby>３<ruby>級<rt>きゅう</rt></ruby></span><span data-grade-name="2" hidden><ruby>全経<rt>ぜんけい</rt></ruby><ruby>簿記<rt>ぼき</rt></ruby>２<ruby>級<rt>きゅう</rt></ruby>（<ruby>商業<rt>しょうぎょう</rt></ruby>）</span></span>
+                    <span class="price-grade-name"><span data-grade-name="4" hidden><ruby>全経<rt>ぜんけい</rt></ruby><ruby>簿記<rt>ぼき</rt></ruby>４<ruby>級<rt>きゅう</rt></ruby></span><span data-grade-name="3"><ruby>全経<rt>ぜんけい</rt></ruby><ruby>簿記<rt>ぼき</rt></ruby>３<ruby>級<rt>きゅう</rt></ruby></span><span data-grade-name="2" hidden><ruby>全経<rt>ぜんけい</rt></ruby><ruby>簿記<rt>ぼき</rt></ruby>２<ruby>級<rt>きゅう</rt></ruby></span></span>
                 </div>
 
                 <div class="price-amount">
@@ -143,51 +138,12 @@
                     </ul>
                 </div>
 
-                <fieldset class="choice-group">
-                    <legend><span class="legend-no">02</span><span>お<ruby>支払<rt>しはら</rt></ruby>い<ruby>方法<rt>ほうほう</rt></ruby>を<ruby>選択<rt>せんたく</rt></ruby></span></legend>
-                    <div class="pay-list">
-                        <label class="pay-option">
-                            <input type="radio" name="payment" value="card" checked>
-                            <span class="pay-body">
-                                <span class="pay-title">
-                                    <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg>
-                                    <span>クレジットカード</span>
-                                </span>
-                                <span class="pay-note">その<ruby>場<rt>ば</rt></ruby>で<ruby>決済<rt>けっさい</rt></ruby>が<ruby>完了<rt>かんりょう</rt></ruby>します</span>
-                            </span>
-                        </label>
-                        <label class="pay-option">
-                            <input type="radio" name="payment" value="konbini">
-                            <span class="pay-body">
-                                <span class="pay-title">
-                                    <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10h16v10H4z"/><path d="M3 10l2-5h14l2 5"/><path d="M10 20v-5h4v5"/></svg>
-                                    <span>コンビニ<ruby>払<rt>ばら</rt></ruby>い</span>
-                                </span>
-                                <span class="pay-note"><ruby>発行<rt>はっこう</rt></ruby>される<ruby>番号<rt>ばんごう</rt></ruby>で、<ruby>期限<rt>きげん</rt></ruby>までに<ruby>店頭<rt>てんとう</rt></ruby>でお<ruby>支払<rt>しはら</rt></ruby>いください</span>
-                            </span>
-                        </label>
-                        <label class="pay-option">
-                            <input type="radio" name="payment" value="bank_transfer">
-                            <span class="pay-body">
-                                <span class="pay-title">
-                                    <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-6 9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></svg>
-                                    <span><ruby>銀行<rt>ぎんこう</rt></ruby><ruby>振込<rt>ふりこみ</rt></ruby></span>
-                                </span>
-                                <span class="pay-note"><ruby>案内<rt>あんない</rt></ruby>される<ruby>専用<rt>せんよう</rt></ruby><ruby>口座<rt>こうざ</rt></ruby>へお<ruby>振<rt>ふ</rt></ruby>り<ruby>込<rt>こ</rt></ruby>みください</span>
-                            </span>
-                        </label>
-                    </div>
-                </fieldset>
 
                 <button type="submit" class="game-btn game-btn-block">
-                    <span id="selectLabel">SELECT LEVEL03</span>
+                    <span><ruby>新規<rt>しんき</rt></ruby><ruby>申込<rt>もうしこみ</rt></ruby></span><span id="selectLabel">// LV.03</span>
                     <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                 </button>
-                <p class="price-secure">
-                    <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-                    <span><ruby>決済<rt>けっさい</rt></ruby>はStripeで<ruby>安全<rt>あんぜん</rt></ruby>に<ruby>処理<rt>しょり</rt></ruby>され、カード<ruby>情報<rt>じょうほう</rt></ruby>は<ruby>当<rt>とう</rt></ruby>サイトに<ruby>保存<rt>ほぞん</rt></ruby>されません。</span>
-                </p>
-                <p class="price-small">※ 2つ<ruby>以上<rt>いじょう</rt></ruby>の<ruby>級<rt>きゅう</rt></ruby>を<ruby>受講<rt>じゅこう</rt></ruby>する<ruby>場合<rt>ばあい</rt></ruby>は、<ruby>級<rt>きゅう</rt></ruby>ごとにお<ruby>申<rt>もう</rt></ruby>し<ruby>込<rt>こ</rt></ruby>みください。<br>※ コンビニ<ruby>払<rt>ばら</rt></ruby>い・<ruby>銀行<rt>ぎんこう</rt></ruby><ruby>振込<rt>ふりこみ</rt></ruby>の<ruby>手数料<rt>てすうりょう</rt></ruby>はお<ruby>客様<rt>きゃくさま</rt></ruby>のご<ruby>負担<rt>ふたん</rt></ruby>となります。</p>
+                <p class="price-small">※ 2つ<ruby>以上<rt>いじょう</rt></ruby>の<ruby>級<rt>きゅう</rt></ruby>を<ruby>受講<rt>じゅこう</rt></ruby>する<ruby>場合<rt>ばあい</rt></ruby>は、<ruby>級<rt>きゅう</rt></ruby>ごとにお<ruby>申<rt>もう</rt></ruby>し<ruby>込<rt>こ</rt></ruby>みください。</p>
             </form>
         </section>
 
@@ -289,11 +245,11 @@
             <div class="console-panel cta-panel">
                 <img src="img/logo.png" alt="" class="cta-logo" width="64" height="73">
                 <p class="cta-code">READY TO DEPLOY?</p>
-                <h2><ruby>合格<rt>ごうかく</rt></ruby>への<ruby>最短<rt>さいたん</rt></ruby>ルートを、<ruby>今日<rt>きょう</rt></ruby>から。</h2>
-                <a href="#pricing" class="game-btn game-btn-lg">
+                <h2><ruby>合格<rt>ごうかく</rt></ruby>への<ruby>最短<rt>さいたん</rt></ruby>ルートを、<br><ruby>今日<rt>きょう</rt></ruby>から。</h2>
+                <button type="button" class="game-btn game-btn-lg" data-open="applyDialog">
                     <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M16 11h6"/></svg>
-                    <span><ruby>会員<rt>かいいん</rt></ruby><ruby>登録<rt>とうろく</rt></ruby>する（<ruby>各級<rt>かくきゅう</rt></ruby>¥1,500）</span>
-                </a>
+                    <span><ruby>会員<rt>かいいん</rt></ruby><ruby>登録<rt>とうろく</rt></ruby>する</span>
+                </button>
             </div>
         </section>
 
@@ -339,7 +295,7 @@
     <!-- スマホ用 下部固定の申し込みバー -->
     <div class="mobile-cta" id="mobileCta">
         <span class="mobile-cta-price"><ruby>各級<rt>かくきゅう</rt></ruby> <strong>¥1,500</strong></span>
-        <a href="#pricing" class="game-btn game-btn-sm"><span><ruby>新規<rt>しんき</rt></ruby><ruby>申込<rt>もうしこみ</rt></ruby></span></a>
+        <button type="button" class="game-btn game-btn-sm" data-open="applyDialog"><span><ruby>新規<rt>しんき</rt></ruby><ruby>申込<rt>もうしこみ</rt></ruby></span></button>
     </div>
 
     <!-- ================= DIALOGS ================= -->
@@ -349,7 +305,52 @@
                 <h2 id="applyTitle"><span class="modal-code">ENTRY FORM //</span><ruby>会員<rt>かいいん</rt></ruby><ruby>登録<rt>とうろく</rt></ruby></h2>
                 <button type="button" class="modal-close" data-close aria-label="閉じる">✕</button>
             </div>
-            <div class="apply-summary" id="applySummary"></div>
+            <p class="apply-price"><ruby>各級<rt>かくきゅう</rt></ruby> <strong>¥1,500</strong>（<ruby>税込<rt>ぜいこみ</rt></ruby>）／<ruby>買<rt>か</rt></ruby>い<ruby>切<rt>き</rt></ruby>り</p>
+            <fieldset class="choice-group">
+                <legend><span class="legend-no">01</span><span><ruby>受講<rt>じゅこう</rt></ruby>する<ruby>級<rt>きゅう</rt></ruby></span></legend>
+                <div class="grade-select">
+                    <label class="grade-chip"><input type="radio" name="grade" value="4"><span><b>LV.04</b><i class="gc-name">4<ruby>級<rt>きゅう</rt></ruby></i></span></label>
+                    <label class="grade-chip"><input type="radio" name="grade" value="3" checked><span><b>LV.03</b><i class="gc-name">3<ruby>級<rt>きゅう</rt></ruby></i></span></label>
+                    <label class="grade-chip"><input type="radio" name="grade" value="2"><span><b>LV.02</b><i class="gc-name">2<ruby>級<rt>きゅう</rt></ruby>（<ruby>商業<rt>しょうぎょう</rt></ruby>）</i></span></label>
+                </div>
+            </fieldset>
+            <fieldset class="choice-group">
+                <legend><span class="legend-no">02</span><span>お<ruby>支払<rt>しはら</rt></ruby>い<ruby>方法<rt>ほうほう</rt></ruby></span></legend>
+                <div class="pay-list">
+                    <label class="pay-option">
+                        <input type="radio" name="payment" value="card" checked>
+                        <span class="pay-body">
+                            <span class="pay-title">
+                                <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg>
+                                <span>クレジットカード</span>
+                            </span>
+                            <span class="pay-note">その<ruby>場<rt>ば</rt></ruby>で<ruby>決済<rt>けっさい</rt></ruby>が<ruby>完了<rt>かんりょう</rt></ruby>します</span>
+                        </span>
+                    </label>
+                    <label class="pay-option">
+                        <input type="radio" name="payment" value="konbini">
+                        <span class="pay-body">
+                            <span class="pay-title">
+                                <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10h16v10H4z"/><path d="M3 10l2-5h14l2 5"/><path d="M10 20v-5h4v5"/></svg>
+                                <span>コンビニ<ruby>払<rt>ばら</rt></ruby>い</span>
+                            </span>
+                            <span class="pay-note"><ruby>発行<rt>はっこう</rt></ruby>される<ruby>番号<rt>ばんごう</rt></ruby>で、<ruby>期限<rt>きげん</rt></ruby>までに<ruby>店頭<rt>てんとう</rt></ruby>でお<ruby>支払<rt>しはら</rt></ruby>いください</span>
+                        </span>
+                    </label>
+                    <label class="pay-option">
+                        <input type="radio" name="payment" value="bank_transfer">
+                        <span class="pay-body">
+                            <span class="pay-title">
+                                <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-6 9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></svg>
+                                <span><ruby>銀行<rt>ぎんこう</rt></ruby><ruby>振込<rt>ふりこみ</rt></ruby></span>
+                            </span>
+                            <span class="pay-note"><ruby>案内<rt>あんない</rt></ruby>される<ruby>専用<rt>せんよう</rt></ruby><ruby>口座<rt>こうざ</rt></ruby>へお<ruby>振<rt>ふ</rt></ruby>り<ruby>込<rt>こ</rt></ruby>みください</span>
+                        </span>
+                    </label>
+                </div>
+            </fieldset>
+            <p class="price-small modal-note">※ コンビニ<ruby>払<rt>ばら</rt></ruby>い・<ruby>銀行<rt>ぎんこう</rt></ruby><ruby>振込<rt>ふりこみ</rt></ruby>の<ruby>手数料<rt>てすうりょう</rt></ruby>はお<ruby>客様<rt>きゃくさま</rt></ruby>のご<ruby>負担<rt>ふたん</rt></ruby>となります。</p>
+            <p class="modal-section"><span class="legend-no">03</span><span>アカウント<ruby>情報<rt>じょうほう</rt></ruby></span></p>
             <label class="field">
                 <span class="field-label">お<ruby>名前<rt>なまえ</rt></ruby></span>
                 <input type="text" name="name" maxlength="50" autocomplete="name" required>
@@ -372,6 +373,10 @@
             </label>
             <p class="form-msg" id="applyMsg" role="status" aria-live="polite"></p>
             <button type="submit" class="game-btn game-btn-block"><span><ruby>支払<rt>しはら</rt></ruby>い<ruby>画面<rt>がめん</rt></ruby>へ<ruby>進<rt>すす</rt></ruby>む</span></button>
+            <p class="price-secure">
+                <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                <span><ruby>決済<rt>けっさい</rt></ruby>はStripeで<ruby>安全<rt>あんぜん</rt></ruby>に<ruby>処理<rt>しょり</rt></ruby>され、カード<ruby>情報<rt>じょうほう</rt></ruby>は<ruby>当<rt>とう</rt></ruby>サイトに<ruby>保存<rt>ほぞん</rt></ruby>されません。</span>
+            </p>
         </form>
     </dialog>
 

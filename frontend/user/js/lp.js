@@ -66,6 +66,7 @@
     function openDialog(id) {
         var dlg = document.getElementById(id);
         if (!dlg) return;
+        if (id === 'applyDialog') setMsg(document.getElementById('applyMsg'), '');
         if (typeof dlg.showModal === 'function') {
             if (!dlg.open) dlg.showModal();
         } else {
@@ -92,9 +93,7 @@
         el.classList.toggle('is-error', !!isError);
     }
 
-    /* ---------- 料金カード → 申し込みフォーム ---------- */
-    var selection = { grade: '3', payment: 'card' };
-
+    /* ---------- 料金カード（級の切り替え） → 申し込みフォーム ---------- */
     function initPrice() {
         var form = document.getElementById('priceForm');
         if (!form) return;
@@ -104,7 +103,7 @@
             var g = (form.querySelector('input[name="grade"]:checked') || {}).value || '3';
             form.setAttribute('data-game-id', 'SECTOR-0' + g);
             document.getElementById('lvBadge').textContent = 'LV.0' + g + ' ENTRY';
-            document.getElementById('selectLabel').textContent = 'SELECT LEVEL0' + g;
+            document.getElementById('selectLabel').textContent = '// LV.0' + g;
             form.querySelectorAll('[data-grade-name]').forEach(function (el) {
                 el.hidden = el.getAttribute('data-grade-name') !== g;
             });
@@ -116,24 +115,13 @@
             r.addEventListener('change', updateGrade);
         });
         updateGrade();
+
+        // 「新規申込」→ カードで選んだ級をフォームに引き継いで開く
         form.addEventListener('submit', function (e) {
             e.preventDefault();
-            var fd = new FormData(form);
-            selection.grade = fd.get('grade') || '3';
-            selection.payment = fd.get('payment') || 'card';
-
-            var summary = document.getElementById('applySummary');
-            summary.replaceChildren();
-            [
-                '全経 ' + GRADE_LABELS[selection.grade],
-                PAYMENT_LABELS[selection.payment],
-                '¥' + Number(CONFIG.PRICE || 1500).toLocaleString('ja-JP') + '（税込）'
-            ].forEach(function (text) {
-                var s = document.createElement('span');
-                s.textContent = text;
-                summary.append(s);
-            });
-            setMsg(document.getElementById('applyMsg'), '');
+            var g = (form.querySelector('input[name="grade"]:checked') || {}).value || '3';
+            var target = document.querySelector('#applyForm input[name="grade"][value="' + g + '"]');
+            if (target) target.checked = true;
             openDialog('applyDialog');
         });
     }
@@ -146,11 +134,15 @@
         form.addEventListener('submit', function (e) {
             e.preventDefault();
             var fd = new FormData(form);
+            var grade = fd.get('grade');
+            var payment = fd.get('payment');
             var name = String(fd.get('name') || '').trim();
             var email = String(fd.get('email') || '').trim();
             var pw = String(fd.get('password') || '');
             var pw2 = String(fd.get('passwordConfirm') || '');
 
+            if (!GRADE_LABELS[grade]) return setMsg(msg, '受講する級を選択してください。', true);
+            if (!PAYMENT_LABELS[payment]) return setMsg(msg, 'お支払い方法を選択してください。', true);
             if (!name || !email) return setMsg(msg, 'お名前とメールアドレスを入力してください。', true);
             if (!form.elements.email.checkValidity()) return setMsg(msg, 'メールアドレスの形式を確認してください。', true);
             if (pw.length < 8) return setMsg(msg, 'パスワードは8文字以上で入力してください。', true);
