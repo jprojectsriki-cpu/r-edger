@@ -3,78 +3,474 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>R-EDGER｜全経簿記 試験対策システム</title>
+    <title>R-EDGER | 全経簿記 学習システム</title>
+    <meta name="description" content="R-EDGERは、全経簿記検定 4級・3級・2級（商業簿記）の大問を本試験形式で攻略できる学習システムです。各級1,500円の買い切り。ふりがな表示対応。">
+    <link rel="icon" href="img/favicon.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #F4EEDB;
-            --card: #FAF6E8;
-            --text: #2A1F14;
-            --sub: #5C4A3A;
-            --green: #2E8B57;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 24px 16px;
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'M PLUS 1p', sans-serif;
-        }
-        .card {
-            width: 100%;
-            max-width: 560px;
-            padding: 40px 28px;
-            background: var(--card);
-            border: 3px solid var(--text);
-            box-shadow: 8px 8px 0 var(--text);
-            text-align: center;
-        }
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            margin-bottom: 16px;
-            background: var(--green);
-            color: #fff;
-            border: 2px solid var(--text);
-            font-family: 'Dela Gothic One', sans-serif;
-            font-size: 0.8rem;
-        }
-        h1 {
-            font-family: 'Dela Gothic One', sans-serif;
-            font-size: 2.4rem;
-            letter-spacing: 0.04em;
-        }
-        .sub { margin: 8px 0 24px; color: var(--sub); font-weight: 700; }
-        .note { line-height: 1.8; margin-bottom: 28px; }
-        .back {
-            display: inline-block;
-            padding: 10px 20px;
-            border: 3px solid var(--text);
-            background: #fff;
-            color: var(--text);
-            text-decoration: none;
-            font-family: 'Dela Gothic One', sans-serif;
-            box-shadow: 4px 4px 0 var(--text);
-        }
-        .back:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--text); }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Outfit:wght@700;800;900&family=M+PLUS+Rounded+1c:wght@700;800&family=M+PLUS+1p:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/lp.css">
+    <script>
+        document.documentElement.classList.add('js');
+        try { if (localStorage.getItem('redger_furigana') === 'off') document.documentElement.classList.add('furigana-off'); } catch (e) {}
+    </script>
 </head>
 <body>
-    <main class="card">
-        <span class="badge">BOOKKEEPING EXAM PREP SYSTEM</span>
-        <h1>R-EDGER</h1>
-        <p class="sub">全経簿記 試験対策システム（4級・3級・2級）</p>
-        <p class="note">
-            ただいま公開準備中です。<br>
-            受講のお申し込み・ログインは、もうしばらくお待ちください。
-        </p>
-        <a class="back" href="https://jprojectsriki-cpu.github.io/rikis_collection/">← ポートフォリオに戻る</a>
+
+    <!-- 3D背景 -->
+    <div id="bg-canvas-container" aria-hidden="true"></div>
+
+    <!-- ================= HEADER: タクティカルHUD ================= -->
+    <header class="site-header" id="top">
+        <div class="header-inner">
+            <a href="#top" class="brand" aria-label="R-EDGER トップへ">
+                <img src="img/logo.png" alt="" class="brand-logo" width="40" height="46">
+                <span class="brand-text">R-EDGER<br><span class="brand-sub">// <ruby>全経<rt>ぜんけい</rt></ruby><ruby>簿記<rt>ぼき</rt></ruby><ruby>試験<rt>しけん</rt></ruby><ruby>対策<rt>たいさく</rt></ruby>SYSTEM</span></span>
+            </a>
+
+            <nav class="nav-desktop" aria-label="メインメニュー">
+                <a href="#pricing">PLAN</a>
+                <a href="#features">FEATURES</a>
+                <a href="#flow">FLOW</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+
+            <div class="header-actions">
+                <button type="button" class="login-btn" data-open="loginDialog">
+                    <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg>
+                    ログイン
+                </button>
+                <a href="#pricing" class="game-btn game-btn-sm">
+                    <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                    <span><ruby>新規<rt>しんき</rt></ruby><ruby>申込<rt>もうしこみ</rt></ruby></span>
+                </a>
+            </div>
+        </div>
+
+        <!-- ふりがな切り替えスイッチ(ヘッダー右下) -->
+        <div class="furigana-tab">
+            <span class="furigana-label" id="furiganaLabel">ふりがな</span>
+            <button type="button" class="switch" id="furiganaSwitch" role="switch" aria-checked="true" aria-labelledby="furiganaLabel">
+                <span class="switch-knob"></span>
+                <span class="switch-on">ON</span>
+                <span class="switch-off">OFF</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="main">
+
+        <!-- ================= HERO ================= -->
+        <section class="hero">
+            <div class="hero-copy reveal">
+                <span class="hero-tag">ZENKEI BOKI // LV.04・LV.03・LV.02</span>
+                <h1 class="hero-title">
+                    <ruby>全経<rt>ぜんけい</rt></ruby><ruby>簿記<rt>ぼき</rt></ruby>を、<br>
+                    <span class="grad"><ruby>戦略的<rt>せんりゃくてき</rt></ruby>な<ruby>学習法<rt>がくしゅうほう</rt></ruby></span><br>で<ruby>完全<rt>かんぜん</rt></ruby><ruby>制圧<rt>せいあつ</rt></ruby>せよ。
+                </h1>
+                <p class="hero-lead">
+                    <ruby>全経<rt>ぜんけい</rt></ruby><ruby>簿記<rt>ぼき</rt></ruby>の<ruby>全<rt>ぜん</rt></ruby><ruby>戦域<rt>せんいき</rt></ruby>を<ruby>制圧<rt>せいあつ</rt></ruby>せよ。<br>
+                    <ruby>無駄<rt>むだ</rt></ruby>を<ruby>削<rt>そ</rt></ruby>ぎ<ruby>落<rt>お</rt></ruby>とした<ruby>戦術<rt>せんじゅつ</rt></ruby>インターフェースで、<ruby>大問<rt>だいもん</rt></ruby><ruby>攻略<rt>こうりゃく</rt></ruby>・<ruby>合格<rt>ごうかく</rt></ruby>への<ruby>最短<rt>さいたん</rt></ruby>ルートを<ruby>演算<rt>えんざん</rt></ruby>する。
+                </p>
+                <div class="hero-cta">
+                    <a href="#pricing" class="game-btn game-btn-lg">
+                        <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M16 11h6"/></svg>
+                        <span><ruby>会員<rt>かいいん</rt></ruby><ruby>登録<rt>とうろく</rt></ruby>する</span>
+                    </a>
+                    <span class="hero-price"><ruby>各級<rt>かくきゅう</rt></ruby> <strong>¥1,500</strong>（<ruby>税込<rt>ぜいこみ</rt></ruby>）／<ruby>買<rt>か</rt></ruby>い<ruby>切<rt>き</rt></ruby>り</span>
+                </div>
+            </div>
+            <div class="hero-emblem reveal" aria-hidden="true">
+                <img src="img/logo.png" alt="" width="260" height="298">
+                <span class="hero-emblem-code">UNIT: R-EDGER // STATUS: READY</span>
+            </div>
+        </section>
+
+        <!-- ================= PRICING ================= -->
+        <section id="pricing" class="section">
+            <div class="section-head reveal">
+                <span class="section-en orange">SELECT PLAN // PRICING</span>
+                <h2 class="section-title"><ruby>受講<rt>じゅこう</rt></ruby>プラン<ruby>選択<rt>せんたく</rt></ruby></h2>
+                <p class="section-note"><ruby>追加<rt>ついか</rt></ruby><ruby>課金<rt>かきん</rt></ruby>・<ruby>月額<rt>げつがく</rt></ruby>サブスクリプション<ruby>要素<rt>ようそ</rt></ruby>は<ruby>一切<rt>いっさい</rt></ruby>ありません。</p>
+            </div>
+
+            <form class="game-card featured price-card reveal" id="priceForm" data-game-id="SECTOR-03" novalidate>
+                <div class="price-top">
+                    <svg class="plan-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 7v5c0 4.5 3.4 7.7 8 9 4.6-1.3 8-4.5 8-9V7z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></svg>
+                    <span class="lv-badge" id="lvBadge">LV.03 ENTRY</span>
+                    <span class="price-grade-name"><span data-grade-name="4" hidden><ruby>全経<rt>ぜんけい</rt></ruby><ruby>簿記<rt>ぼき</rt></ruby>４<ruby>級<rt>きゅう</rt></ruby></span><span data-grade-name="3"><ruby>全経<rt>ぜんけい</rt></ruby><ruby>簿記<rt>ぼき</rt></ruby>３<ruby>級<rt>きゅう</rt></ruby></span><span data-grade-name="2" hidden><ruby>全経<rt>ぜんけい</rt></ruby><ruby>簿記<rt>ぼき</rt></ruby>２<ruby>級<rt>きゅう</rt></ruby>（<ruby>商業<rt>しょうぎょう</rt></ruby>）</span></span>
+                </div>
+
+                <div class="price-amount">
+                    <span class="price-each"><ruby>各級<rt>かくきゅう</rt></ruby></span>
+                    <span class="price-num">¥1,500</span>
+                    <span class="price-tax">（<ruby>税込<rt>ぜいこみ</rt></ruby>）</span>
+                </div>
+                <p class="price-sub">4<ruby>級<rt>きゅう</rt></ruby>・3<ruby>級<rt>きゅう</rt></ruby>・2<ruby>級<rt>きゅう</rt></ruby>すべて<ruby>同<rt>おな</rt></ruby>じ<ruby>料金<rt>りょうきん</rt></ruby>／<ruby>買<rt>か</rt></ruby>い<ruby>切<rt>き</rt></ruby>り</p>
+
+                <fieldset class="choice-group">
+                    <legend><span class="legend-no">01</span><span><ruby>受講<rt>じゅこう</rt></ruby>する<ruby>級<rt>きゅう</rt></ruby>を<ruby>選択<rt>せんたく</rt></ruby></span></legend>
+                    <div class="grade-select">
+                        <label class="grade-chip"><input type="radio" name="grade" value="4"><span><b>LV.04</b><i class="gc-name">4<ruby>級<rt>きゅう</rt></ruby></i></span></label>
+                        <label class="grade-chip"><input type="radio" name="grade" value="3" checked><span><b>LV.03</b><i class="gc-name">3<ruby>級<rt>きゅう</rt></ruby></i></span></label>
+                        <label class="grade-chip"><input type="radio" name="grade" value="2"><span><b>LV.02</b><i class="gc-name">2<ruby>級<rt>きゅう</rt></ruby>（<ruby>商業<rt>しょうぎょう</rt></ruby>）</i></span></label>
+                    </div>
+                </fieldset>
+
+                <div class="topic-box">
+                    <p class="topic-head">MISSION LIST // <ruby>収録<rt>しゅうろく</rt></ruby><ruby>内容<rt>ないよう</rt></ruby></p>
+                    <ul class="topic-list" data-grade="4" hidden>
+                        <li><ruby>帳簿<rt>ちょうぼ</rt></ruby><ruby>記入<rt>きにゅう</rt></ruby>についての〇✖<ruby>問題<rt>もんだい</rt></ruby></li>
+                        <li><ruby>仕訳<rt>しわけ</rt></ruby><ruby>問題<rt>もんだい</rt></ruby></li>
+                        <li><ruby>会計<rt>かいけい</rt></ruby><ruby>構造式<rt>こうぞうしき</rt></ruby>の<ruby>計算<rt>けいさん</rt></ruby><ruby>問題<rt>もんだい</rt></ruby></li>
+                        <li><ruby>現金<rt>げんきん</rt></ruby><ruby>出納帳<rt>すいとうちょう</rt></ruby>・<ruby>仕訳帳<rt>しわけちょう</rt></ruby>・<ruby>会計<rt>かいけい</rt></ruby><ruby>報告書<rt>ほうこくしょ</rt></ruby></li>
+                        <li><ruby>精算表<rt>せいさんひょう</rt></ruby>・<ruby>貸借対照表<rt>たいしゃくたいしょうひょう</rt></ruby>・<ruby>損益<rt>そんえき</rt></ruby><ruby>計算書<rt>けいさんしょ</rt></ruby></li>
+                    </ul>
+                    <ul class="topic-list" data-grade="3">
+                        <li><ruby>仕訳<rt>しわけ</rt></ruby><ruby>問題<rt>もんだい</rt></ruby></li>
+                        <li><ruby>計算<rt>けいさん</rt></ruby><ruby>問題<rt>もんだい</rt></ruby></li>
+                        <li><ruby>逆<rt>ぎゃく</rt></ruby><ruby>仕訳<rt>しわけ</rt></ruby><ruby>問題<rt>もんだい</rt></ruby></li>
+                        <li><ruby>商品<rt>しょうひん</rt></ruby><ruby>有高帳<rt>ありだかちょう</rt></ruby>（<ruby>先入先出法<rt>さきいれさきだしほう</rt></ruby>）</li>
+                        <li><ruby>小口<rt>こぐち</rt></ruby><ruby>現金<rt>げんきん</rt></ruby><ruby>出納帳<rt>すいとうちょう</rt></ruby></li>
+                        <li><ruby>精算表<rt>せいさんひょう</rt></ruby>（<ruby>決算<rt>けっさん</rt></ruby><ruby>整理<rt>せいり</rt></ruby><ruby>事項<rt>じこう</rt></ruby>）</li>
+                    </ul>
+                    <ul class="topic-list" data-grade="2" hidden>
+                        <li><ruby>仕訳<rt>しわけ</rt></ruby><ruby>問題<rt>もんだい</rt></ruby></li>
+                        <li><ruby>計算<rt>けいさん</rt></ruby><ruby>問題<rt>もんだい</rt></ruby></li>
+                        <li><ruby>商品<rt>しょうひん</rt></ruby><ruby>有高帳<rt>ありだかちょう</rt></ruby>（<ruby>移動<rt>いどう</rt></ruby><ruby>平均法<rt>へいきんほう</rt></ruby>）</li>
+                        <li><ruby>逆<rt>ぎゃく</rt></ruby><ruby>仕訳<rt>しわけ</rt></ruby></li>
+                        <li><ruby>精算表<rt>せいさんひょう</rt></ruby>（<ruby>決算<rt>けっさん</rt></ruby><ruby>整理<rt>せいり</rt></ruby><ruby>事項<rt>じこう</rt></ruby>）</li>
+                    </ul>
+                </div>
+
+                <fieldset class="choice-group">
+                    <legend><span class="legend-no">02</span><span>お<ruby>支払<rt>しはら</rt></ruby>い<ruby>方法<rt>ほうほう</rt></ruby>を<ruby>選択<rt>せんたく</rt></ruby></span></legend>
+                    <div class="pay-list">
+                        <label class="pay-option">
+                            <input type="radio" name="payment" value="card" checked>
+                            <span class="pay-body">
+                                <span class="pay-title">
+                                    <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg>
+                                    <span>クレジットカード</span>
+                                </span>
+                                <span class="pay-note">その<ruby>場<rt>ば</rt></ruby>で<ruby>決済<rt>けっさい</rt></ruby>が<ruby>完了<rt>かんりょう</rt></ruby>します</span>
+                            </span>
+                        </label>
+                        <label class="pay-option">
+                            <input type="radio" name="payment" value="konbini">
+                            <span class="pay-body">
+                                <span class="pay-title">
+                                    <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10h16v10H4z"/><path d="M3 10l2-5h14l2 5"/><path d="M10 20v-5h4v5"/></svg>
+                                    <span>コンビニ<ruby>払<rt>ばら</rt></ruby>い</span>
+                                </span>
+                                <span class="pay-note"><ruby>発行<rt>はっこう</rt></ruby>される<ruby>番号<rt>ばんごう</rt></ruby>で、<ruby>期限<rt>きげん</rt></ruby>までに<ruby>店頭<rt>てんとう</rt></ruby>でお<ruby>支払<rt>しはら</rt></ruby>いください</span>
+                            </span>
+                        </label>
+                        <label class="pay-option">
+                            <input type="radio" name="payment" value="bank_transfer">
+                            <span class="pay-body">
+                                <span class="pay-title">
+                                    <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-6 9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></svg>
+                                    <span><ruby>銀行<rt>ぎんこう</rt></ruby><ruby>振込<rt>ふりこみ</rt></ruby></span>
+                                </span>
+                                <span class="pay-note"><ruby>案内<rt>あんない</rt></ruby>される<ruby>専用<rt>せんよう</rt></ruby><ruby>口座<rt>こうざ</rt></ruby>へお<ruby>振<rt>ふ</rt></ruby>り<ruby>込<rt>こ</rt></ruby>みください</span>
+                            </span>
+                        </label>
+                    </div>
+                </fieldset>
+
+                <button type="submit" class="game-btn game-btn-block">
+                    <span id="selectLabel">SELECT LEVEL03</span>
+                    <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </button>
+                <p class="price-secure">
+                    <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                    <span><ruby>決済<rt>けっさい</rt></ruby>はStripeで<ruby>安全<rt>あんぜん</rt></ruby>に<ruby>処理<rt>しょり</rt></ruby>され、カード<ruby>情報<rt>じょうほう</rt></ruby>は<ruby>当<rt>とう</rt></ruby>サイトに<ruby>保存<rt>ほぞん</rt></ruby>されません。</span>
+                </p>
+                <p class="price-small">※ 2つ<ruby>以上<rt>いじょう</rt></ruby>の<ruby>級<rt>きゅう</rt></ruby>を<ruby>受講<rt>じゅこう</rt></ruby>する<ruby>場合<rt>ばあい</rt></ruby>は、<ruby>級<rt>きゅう</rt></ruby>ごとにお<ruby>申<rt>もう</rt></ruby>し<ruby>込<rt>こ</rt></ruby>みください。<br>※ コンビニ<ruby>払<rt>ばら</rt></ruby>い・<ruby>銀行<rt>ぎんこう</rt></ruby><ruby>振込<rt>ふりこみ</rt></ruby>の<ruby>手数料<rt>てすうりょう</rt></ruby>はお<ruby>客様<rt>きゃくさま</rt></ruby>のご<ruby>負担<rt>ふたん</rt></ruby>となります。</p>
+            </form>
+        </section>
+
+        <!-- ================= FEATURES ================= -->
+        <section id="features" class="section">
+            <div class="section-head reveal">
+                <span class="section-en cyan">TACTICAL ADVANTAGE // FEATURES</span>
+                <h2 class="section-title">R-EDGERの3<ruby>大<rt>だい</rt></ruby><ruby>特性<rt>とくせい</rt></ruby></h2>
+            </div>
+            <div class="feature-grid">
+                <article class="console-panel reveal">
+                    <div class="feature-icon"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4M8 11h6M11 8v6"/></svg></div>
+                    <h3><ruby>高速<rt>こうそく</rt></ruby><ruby>大問<rt>だいもん</rt></ruby>シミュレーション</h3>
+                    <p><ruby>本試験<rt>ほんしけん</rt></ruby>の<ruby>出題<rt>しゅつだい</rt></ruby><ruby>形式<rt>けいしき</rt></ruby>に<ruby>準拠<rt>じゅんきょ</rt></ruby>したモジュール。<ruby>無駄<rt>むだ</rt></ruby>な<ruby>長文<rt>ちょうぶん</rt></ruby>を<ruby>廃<rt>はい</rt></ruby>し、<ruby>即座<rt>そくざ</rt></ruby>に<ruby>解答<rt>かいとう</rt></ruby>を<ruby>導<rt>みちび</rt></ruby>く<ruby>機動力<rt>きどうりょく</rt></ruby>を<ruby>養<rt>やしな</rt></ruby>う。</p>
+                </article>
+                <article class="console-panel reveal">
+                    <div class="feature-icon is-orange"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 12h5M8 15h8"/></svg></div>
+                    <h3><ruby>直感的<rt>ちょっかんてき</rt></ruby>インターフェース</h3>
+                    <p><ruby>日本語<rt>にほんご</rt></ruby>の<ruby>壁<rt>かべ</rt></ruby>を<ruby>最小限<rt>さいしょうげん</rt></ruby>に<ruby>抑<rt>おさ</rt></ruby>えたグラフィカルな<ruby>入力<rt>にゅうりょく</rt></ruby>システム。ふりがな<ruby>表示<rt>ひょうじ</rt></ruby>にも<ruby>対応<rt>たいおう</rt></ruby>し、<ruby>留学生<rt>りゅうがくせい</rt></ruby>や<ruby>多忙<rt>たぼう</rt></ruby>な<ruby>社会人<rt>しゃかいじん</rt></ruby>でもスムーズに<ruby>作戦<rt>さくせん</rt></ruby><ruby>遂行<rt>すいこう</rt></ruby><ruby>可能<rt>かのう</rt></ruby>。</p>
+                </article>
+                <article class="console-panel reveal">
+                    <div class="feature-icon"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M17 7H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H6"/></svg></div>
+                    <h3><ruby>完全<rt>かんぜん</rt></ruby><ruby>買<rt>か</rt></ruby>い<ruby>切<rt>き</rt></ruby>り<ruby>制<rt>せい</rt></ruby></h3>
+                    <p><ruby>毎月<rt>まいつき</rt></ruby>の<ruby>維持費<rt>いじひ</rt></ruby>はゼロ。<ruby>一度<rt>いちど</rt></ruby><ruby>購入<rt>こうにゅう</rt></ruby>すれば、アップデートがあっても<ruby>追加<rt>ついか</rt></ruby><ruby>課金<rt>かきん</rt></ruby>なしで<ruby>使<rt>つか</rt></ruby>い<ruby>続<rt>つづ</rt></ruby>けられる。</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- ================= FLOW ================= -->
+        <section id="flow" class="section">
+            <div class="section-head reveal">
+                <span class="section-en orange">DEPLOY SEQUENCE // FLOW</span>
+                <h2 class="section-title"><ruby>利用<rt>りよう</rt></ruby><ruby>開始<rt>かいし</rt></ruby>までの<ruby>流<rt>なが</rt></ruby>れ</h2>
+            </div>
+            <ol class="flow-list">
+                <li class="console-panel flow-step reveal">
+                    <span class="flow-no">STEP 01</span>
+                    <h3><ruby>級<rt>きゅう</rt></ruby>と<ruby>支払<rt>しはら</rt></ruby>い<ruby>方法<rt>ほうほう</rt></ruby>を<ruby>選択<rt>せんたく</rt></ruby></h3>
+                    <p><ruby>受講<rt>じゅこう</rt></ruby>する<ruby>級<rt>きゅう</rt></ruby>とお<ruby>支払<rt>しはら</rt></ruby>い<ruby>方法<rt>ほうほう</rt></ruby>を<ruby>選<rt>えら</rt></ruby>び、お<ruby>名前<rt>なまえ</rt></ruby>・メールアドレス・パスワードを<ruby>登録<rt>とうろく</rt></ruby>します。</p>
+                </li>
+                <li class="console-panel flow-step reveal">
+                    <span class="flow-no">STEP 02</span>
+                    <h3>お<ruby>支払<rt>しはら</rt></ruby>い</h3>
+                    <p>クレジットカード・コンビニ・<ruby>銀行<rt>ぎんこう</rt></ruby><ruby>振込<rt>ふりこみ</rt></ruby>から<ruby>選<rt>えら</rt></ruby>べます。<ruby>決済<rt>けっさい</rt></ruby>は<ruby>安全<rt>あんぜん</rt></ruby>なStripeの<ruby>画面<rt>がめん</rt></ruby>で<ruby>行<rt>おこな</rt></ruby>われます。</p>
+                </li>
+                <li class="console-panel flow-step reveal">
+                    <span class="flow-no">STEP 03</span>
+                    <h3>アカウント<ruby>有効化<rt>ゆうこうか</rt></ruby></h3>
+                    <p>お<ruby>支払<rt>しはら</rt></ruby>いを<ruby>確認<rt>かくにん</rt></ruby>したあと、アカウントを<ruby>有効化<rt>ゆうこうか</rt></ruby>し、<ruby>登録<rt>とうろく</rt></ruby>メールアドレスにお<ruby>知<rt>し</rt></ruby>らせします。</p>
+                </li>
+                <li class="console-panel flow-step reveal">
+                    <span class="flow-no">STEP 04</span>
+                    <h3>ログインして<ruby>作戦<rt>さくせん</rt></ruby><ruby>開始<rt>かいし</rt></ruby></h3>
+                    <p>このページの「ログイン」から<ruby>入<rt>はい</rt></ruby>れば<ruby>準備<rt>じゅんび</rt></ruby><ruby>完了<rt>かんりょう</rt></ruby>。<ruby>合格<rt>ごうかく</rt></ruby>に<ruby>向<rt>む</rt></ruby>けた<ruby>特訓<rt>とっくん</rt></ruby>を<ruby>始<rt>はじ</rt></ruby>めましょう。</p>
+                </li>
+            </ol>
+        </section>
+
+        <!-- ================= FAQ ================= -->
+        <section id="faq" class="section section-narrow">
+            <div class="section-head reveal">
+                <span class="section-en orange">FAQ // BRIEFING</span>
+                <h2 class="section-title">よくある<ruby>質問<rt>しつもん</rt></ruby>（<ruby>作戦<rt>さくせん</rt></ruby><ruby>前<rt>まえ</rt></ruby><ruby>確認<rt>かくにん</rt></ruby>）</h2>
+            </div>
+            <div class="faq-list">
+                <details class="console-panel faq-item reveal" open>
+                    <summary><ruby>追加<rt>ついか</rt></ruby>の<ruby>課金<rt>かきん</rt></ruby>やサブスクリプション<ruby>更新<rt>こうしん</rt></ruby>は<ruby>発生<rt>はっせい</rt></ruby>しますか？</summary>
+                    <p><ruby>一切<rt>いっさい</rt></ruby><ruby>発生<rt>はっせい</rt></ruby>しません。<ruby>一度<rt>いちど</rt></ruby>のお<ruby>支払<rt>しはら</rt></ruby>いで、その<ruby>級<rt>きゅう</rt></ruby>のすべての<ruby>機能<rt>きのう</rt></ruby>をご<ruby>利用<rt>りよう</rt></ruby>いただけます。</p>
+                </details>
+                <details class="console-panel faq-item reveal">
+                    <summary><ruby>全経<rt>ぜんけい</rt></ruby>2<ruby>級<rt>きゅう</rt></ruby>の「<ruby>工業<rt>こうぎょう</rt></ruby><ruby>簿記<rt>ぼき</rt></ruby>」は<ruby>対象<rt>たいしょう</rt></ruby>に<ruby>含<rt>ふく</rt></ruby>まれていますか？</summary>
+                    <p><ruby>本<rt>ほん</rt></ruby>システムは「<ruby>商業<rt>しょうぎょう</rt></ruby><ruby>簿記<rt>ぼき</rt></ruby>」に<ruby>特化<rt>とっか</rt></ruby>しています。<ruby>全経<rt>ぜんけい</rt></ruby>2<ruby>級<rt>きゅう</rt></ruby>の<ruby>工業<rt>こうぎょう</rt></ruby><ruby>簿記<rt>ぼき</rt></ruby><ruby>分野<rt>ぶんや</rt></ruby>は<ruby>対象外<rt>たいしょうがい</rt></ruby>となりますのでご<ruby>注意<rt>ちゅうい</rt></ruby>ください。</p>
+                </details>
+                <details class="console-panel faq-item reveal">
+                    <summary>どんな<ruby>支払<rt>しはら</rt></ruby>い<ruby>方法<rt>ほうほう</rt></ruby>がありますか？</summary>
+                    <p>クレジットカード、コンビニ<ruby>払<rt>ばら</rt></ruby>い、<ruby>銀行<rt>ぎんこう</rt></ruby><ruby>振込<rt>ふりこみ</rt></ruby>の3つから<ruby>選<rt>えら</rt></ruby>べます。<ruby>決済<rt>けっさい</rt></ruby>はStripeで<ruby>安全<rt>あんぜん</rt></ruby>に<ruby>処理<rt>しょり</rt></ruby>されます。</p>
+                </details>
+                <details class="console-panel faq-item reveal">
+                    <summary><ruby>申<rt>もう</rt></ruby>し<ruby>込<rt>こ</rt></ruby>んだら、すぐに<ruby>使<rt>つか</rt></ruby>えますか？</summary>
+                    <p>お<ruby>支払<rt>しはら</rt></ruby>いを<ruby>確認<rt>かくにん</rt></ruby>したあと、アカウントを<ruby>有効化<rt>ゆうこうか</rt></ruby>してメールでお<ruby>知<rt>し</rt></ruby>らせします。コンビニ<ruby>払<rt>ばら</rt></ruby>い・<ruby>銀行<rt>ぎんこう</rt></ruby><ruby>振込<rt>ふりこみ</rt></ruby>は<ruby>入金<rt>にゅうきん</rt></ruby>の<ruby>確認<rt>かくにん</rt></ruby>に<ruby>時間<rt>じかん</rt></ruby>がかかる<ruby>場合<rt>ばあい</rt></ruby>があります。</p>
+                </details>
+                <details class="console-panel faq-item reveal">
+                    <summary><ruby>複数<rt>ふくすう</rt></ruby>の<ruby>級<rt>きゅう</rt></ruby>を<ruby>受講<rt>じゅこう</rt></ruby>したいです。</summary>
+                    <p><ruby>料金<rt>りょうきん</rt></ruby>は1つの<ruby>級<rt>きゅう</rt></ruby>ごとに1,500<ruby>円<rt>えん</rt></ruby>です。<ruby>受講<rt>じゅこう</rt></ruby>したい<ruby>級<rt>きゅう</rt></ruby>ごとにお<ruby>申<rt>もう</rt></ruby>し<ruby>込<rt>こ</rt></ruby>みください。</p>
+                </details>
+                <details class="console-panel faq-item reveal">
+                    <summary>ふりがなを<ruby>消<rt>け</rt></ruby>すことはできますか？</summary>
+                    <p>はい。ページ<ruby>右上<rt>みぎうえ</rt></ruby>の「ふりがな」スイッチでON／OFFを<ruby>切<rt>き</rt></ruby>り<ruby>替<rt>か</rt></ruby>えられます。<ruby>設定<rt>せってい</rt></ruby>はお<ruby>使<rt>つか</rt></ruby>いのブラウザに<ruby>保存<rt>ほぞん</rt></ruby>されます。</p>
+                </details>
+                <details class="console-panel faq-item reveal">
+                    <summary><ruby>返金<rt>へんきん</rt></ruby>はできますか？</summary>
+                    <p>デジタルコンテンツの<ruby>性質<rt>せいしつ</rt></ruby>上、<ruby>利用<rt>りよう</rt></ruby><ruby>開始<rt>かいし</rt></ruby><ruby>後<rt>ご</rt></ruby>の<ruby>返金<rt>へんきん</rt></ruby>はお<ruby>受<rt>う</rt></ruby>けしていません。くわしくは「<ruby>特定<rt>とくてい</rt></ruby><ruby>商取引法<rt>しょうとりひきほう</rt></ruby>に<ruby>基<rt>もと</rt></ruby>づく<ruby>表記<rt>ひょうき</rt></ruby>」をご<ruby>確認<rt>かくにん</rt></ruby>ください。</p>
+                </details>
+            </div>
+        </section>
+
+        <!-- ================= CTA ================= -->
+        <section class="cta reveal">
+            <div class="console-panel cta-panel">
+                <img src="img/logo.png" alt="" class="cta-logo" width="64" height="73">
+                <p class="cta-code">READY TO DEPLOY?</p>
+                <h2><ruby>合格<rt>ごうかく</rt></ruby>への<ruby>最短<rt>さいたん</rt></ruby>ルートを、<ruby>今日<rt>きょう</rt></ruby>から。</h2>
+                <a href="#pricing" class="game-btn game-btn-lg">
+                    <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M16 11h6"/></svg>
+                    <span><ruby>会員<rt>かいいん</rt></ruby><ruby>登録<rt>とうろく</rt></ruby>する（<ruby>各級<rt>かくきゅう</rt></ruby>¥1,500）</span>
+                </a>
+            </div>
+        </section>
+
     </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="footer-logo-row">
+                    <img src="img/logo.png" alt="" width="40" height="46">
+                    <span>R-EDGER<br><small>// <ruby>全経<rt>ぜんけい</rt></ruby><ruby>簿記<rt>ぼき</rt></ruby><ruby>試験<rt>しけん</rt></ruby><ruby>対策<rt>たいさく</rt></ruby>SYSTEM</small></span>
+                </div>
+                <p><ruby>全経<rt>ぜんけい</rt></ruby><ruby>簿記<rt>ぼき</rt></ruby> 4<ruby>級<rt>きゅう</rt></ruby>・3<ruby>級<rt>きゅう</rt></ruby>・2<ruby>級<rt>きゅう</rt></ruby>（<ruby>商業<rt>しょうぎょう</rt></ruby><ruby>簿記<rt>ぼき</rt></ruby>）<ruby>対応<rt>たいおう</rt></ruby></p>
+                <a href="https://jprojectsriki-cpu.github.io/rikis_collection/" class="footer-series">R-SERIES <ruby>一覧<rt>いちらん</rt></ruby>へ ➔</a>
+            </div>
+            <div class="footer-col">
+                <h3>MENU</h3>
+                <ul>
+                    <li><a href="#pricing"><ruby>受講<rt>じゅこう</rt></ruby>プラン</a></li>
+                    <li><a href="#features"><ruby>特性<rt>とくせい</rt></ruby></a></li>
+                    <li><a href="#flow"><ruby>利用<rt>りよう</rt></ruby><ruby>開始<rt>かいし</rt></ruby>までの<ruby>流<rt>なが</rt></ruby>れ</a></li>
+                    <li><a href="#faq">よくある<ruby>質問<rt>しつもん</rt></ruby></a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>INFORMATION</h3>
+                <ul>
+                    <li><button type="button" class="link-btn" data-open="tokushohoDialog"><ruby>特定<rt>とくてい</rt></ruby><ruby>商取引法<rt>しょうとりひきほう</rt></ruby>に<ruby>基<rt>もと</rt></ruby>づく<ruby>表記<rt>ひょうき</rt></ruby></button></li>
+                    <li><button type="button" class="link-btn" data-open="privacyDialog">プライバシーポリシー</button></li>
+                    <li><button type="button" class="link-btn" data-open="termsDialog"><ruby>利用<rt>りよう</rt></ruby><ruby>規約<rt>きやく</rt></ruby></button></li>
+                    <li><a href="https://jprojectsriki-cpu.github.io/rikis_collection/#contact">お<ruby>問<rt>と</rt></ruby>い<ruby>合<rt>あ</rt></ruby>わせ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>※ <ruby>全経<rt>ぜんけい</rt></ruby>2<ruby>級<rt>きゅう</rt></ruby>の<ruby>工業<rt>こうぎょう</rt></ruby><ruby>簿記<rt>ぼき</rt></ruby><ruby>分野<rt>ぶんや</rt></ruby>は<ruby>対象外<rt>たいしょうがい</rt></ruby>となります。</p>
+            <p>※ <ruby>本<rt>ほん</rt></ruby>サービスは<ruby>個人<rt>こじん</rt></ruby>が<ruby>運営<rt>うんえい</rt></ruby>する<ruby>学習<rt>がくしゅう</rt></ruby><ruby>教材<rt>きょうざい</rt></ruby>であり、<ruby>公益<rt>こうえき</rt></ruby><ruby>社団<rt>しゃだん</rt></ruby><ruby>法人<rt>ほうじん</rt></ruby><ruby>全国<rt>ぜんこく</rt></ruby><ruby>経理<rt>けいり</rt></ruby><ruby>教育<rt>きょういく</rt></ruby><ruby>協会<rt>きょうかい</rt></ruby>の<ruby>公式<rt>こうしき</rt></ruby>サービスではありません。</p>
+            <p class="copyright">&copy; 2026 R-EDGER / ReicherRick. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+    <!-- スマホ用 下部固定の申し込みバー -->
+    <div class="mobile-cta" id="mobileCta">
+        <span class="mobile-cta-price"><ruby>各級<rt>かくきゅう</rt></ruby> <strong>¥1,500</strong></span>
+        <a href="#pricing" class="game-btn game-btn-sm"><span><ruby>新規<rt>しんき</rt></ruby><ruby>申込<rt>もうしこみ</rt></ruby></span></a>
+    </div>
+
+    <!-- ================= DIALOGS ================= -->
+    <dialog class="modal" id="applyDialog" aria-labelledby="applyTitle">
+        <form class="modal-box" id="applyForm" novalidate>
+            <div class="modal-head">
+                <h2 id="applyTitle"><span class="modal-code">ENTRY FORM //</span><ruby>会員<rt>かいいん</rt></ruby><ruby>登録<rt>とうろく</rt></ruby></h2>
+                <button type="button" class="modal-close" data-close aria-label="閉じる">✕</button>
+            </div>
+            <div class="apply-summary" id="applySummary"></div>
+            <label class="field">
+                <span class="field-label">お<ruby>名前<rt>なまえ</rt></ruby></span>
+                <input type="text" name="name" maxlength="50" autocomplete="name" required>
+            </label>
+            <label class="field">
+                <span class="field-label">メールアドレス</span>
+                <input type="email" name="email" maxlength="200" autocomplete="email" required>
+            </label>
+            <label class="field">
+                <span class="field-label">パスワード（8<ruby>文字<rt>もじ</rt></ruby><ruby>以上<rt>いじょう</rt></ruby>）</span>
+                <input type="password" name="password" minlength="8" maxlength="64" autocomplete="new-password" required>
+            </label>
+            <label class="field">
+                <span class="field-label">パスワード（<ruby>確認<rt>かくにん</rt></ruby>）</span>
+                <input type="password" name="passwordConfirm" minlength="8" maxlength="64" autocomplete="new-password" required>
+            </label>
+            <label class="agree">
+                <input type="checkbox" name="agree" required>
+                <span><button type="button" class="link-btn" data-open="termsDialog"><ruby>利用<rt>りよう</rt></ruby><ruby>規約<rt>きやく</rt></ruby></button>と<button type="button" class="link-btn" data-open="privacyDialog">プライバシーポリシー</button>に<ruby>同意<rt>どうい</rt></ruby>する</span>
+            </label>
+            <p class="form-msg" id="applyMsg" role="status" aria-live="polite"></p>
+            <button type="submit" class="game-btn game-btn-block"><span><ruby>支払<rt>しはら</rt></ruby>い<ruby>画面<rt>がめん</rt></ruby>へ<ruby>進<rt>すす</rt></ruby>む</span></button>
+        </form>
+    </dialog>
+
+    <dialog class="modal" id="loginDialog" aria-labelledby="loginTitle">
+        <form class="modal-box" id="loginForm" novalidate>
+            <div class="modal-head">
+                <h2 id="loginTitle"><span class="modal-code">AUTH //</span>ログイン</h2>
+                <button type="button" class="modal-close" data-close aria-label="閉じる">✕</button>
+            </div>
+            <label class="field">
+                <span class="field-label">メールアドレス</span>
+                <input type="email" name="email" autocomplete="email" required>
+            </label>
+            <label class="field">
+                <span class="field-label">パスワード</span>
+                <input type="password" name="password" autocomplete="current-password" required>
+            </label>
+            <p class="form-msg" id="loginMsg" role="status" aria-live="polite"></p>
+            <button type="submit" class="game-btn game-btn-block is-cyan">LOGIN</button>
+        </form>
+    </dialog>
+
+    <dialog class="modal" id="tokushohoDialog" aria-labelledby="tokushohoTitle">
+        <div class="modal-box">
+            <div class="modal-head">
+                <h2 id="tokushohoTitle">特定商取引法に基づく表記</h2>
+                <button type="button" class="modal-close" data-close aria-label="閉じる">✕</button>
+            </div>
+            <dl class="doc-table">
+                <dt>販売事業者</dt><dd>中村 力（ReicherRick）</dd>
+                <dt>運営責任者</dt><dd>中村 力</dd>
+                <dt>所在地</dt><dd>請求があった場合には、遅滞なく開示いたします。</dd>
+                <dt>電話番号</dt><dd>請求があった場合には、遅滞なく開示いたします。</dd>
+                <dt>メールアドレス</dt><dd class="todo">【ここに連絡用メールアドレスを記入】</dd>
+                <dt>販売価格</dt><dd>各級 1,500円（税込）</dd>
+                <dt>商品代金以外の必要料金</dt><dd>コンビニ払い・銀行振込の手数料、インターネット接続にかかる通信料はお客様のご負担となります。</dd>
+                <dt>支払方法</dt><dd>クレジットカード、コンビニ払い、銀行振込（決済代行：Stripe）</dd>
+                <dt>支払時期</dt><dd>クレジットカード：お申し込み時に決済されます。<br>コンビニ払い・銀行振込：お申し込み後、案内される期限までにお支払いください。</dd>
+                <dt>サービスの提供時期</dt><dd>お支払いの確認後、アカウントを有効化し、その旨をメールでお知らせした時点から利用できます。</dd>
+                <dt>返品・キャンセル</dt><dd>デジタルコンテンツの性質上、利用開始後の返品・返金はお受けしておりません。</dd>
+                <dt>動作環境</dt><dd>最新版の Google Chrome / Safari / Microsoft Edge</dd>
+            </dl>
+        </div>
+    </dialog>
+
+    <dialog class="modal" id="privacyDialog" aria-labelledby="privacyTitle">
+        <div class="modal-box">
+            <div class="modal-head">
+                <h2 id="privacyTitle">プライバシーポリシー</h2>
+                <button type="button" class="modal-close" data-close aria-label="閉じる">✕</button>
+            </div>
+            <div class="doc-body">
+                <p>R-EDGER（以下「本サービス」）は、利用者の個人情報を以下のとおり取り扱います。</p>
+                <h3>1. 取得する情報</h3>
+                <p>お名前、メールアドレス、パスワード（ハッシュ化して保存し、元のパスワードは保存しません）、学習履歴、お申し込み・お支払いの状況。</p>
+                <h3>2. 利用目的</h3>
+                <p>本サービスの提供、アカウントの管理、お支払いの確認、お問い合わせへの対応、重要なお知らせの送信、サービス改善のため。</p>
+                <h3>3. 決済情報</h3>
+                <p>お支払いはStripe, Inc.が提供する決済サービスで処理されます。クレジットカード情報を本サービスが取得・保存することはありません。</p>
+                <h3>4. 外部サービスの利用</h3>
+                <p>データの保存およびメール送信にGoogleのサービス（Google スプレッドシート / Apps Script）を利用しています。</p>
+                <h3>5. 第三者提供</h3>
+                <p>法令に基づく場合を除き、ご本人の同意なく個人情報を第三者に提供することはありません。</p>
+                <h3>6. 開示・訂正・削除</h3>
+                <p>ご本人からの個人情報の開示・訂正・削除のご依頼には、本人確認のうえ対応します。お問い合わせフォームよりご連絡ください。</p>
+                <p class="doc-date">制定日：2026年10月21日</p>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog class="modal" id="termsDialog" aria-labelledby="termsTitle">
+        <div class="modal-box">
+            <div class="modal-head">
+                <h2 id="termsTitle">利用規約</h2>
+                <button type="button" class="modal-close" data-close aria-label="閉じる">✕</button>
+            </div>
+            <div class="doc-body">
+                <h3>第1条（適用）</h3>
+                <p>本規約は、R-EDGER（以下「本サービス」）の利用に関する条件を定めるものです。利用者は本規約に同意のうえ、本サービスを利用するものとします。</p>
+                <h3>第2条（アカウント）</h3>
+                <p>利用者は、登録したメールアドレスおよびパスワードを自己の責任で管理し、第三者に利用させてはなりません。</p>
+                <h3>第3条（料金）</h3>
+                <p>利用料金は各級1,500円（税込）の買い切りとし、お申し込み時に選択した方法でお支払いいただきます。月額料金や追加料金は発生しません。</p>
+                <h3>第4条（禁止事項）</h3>
+                <p>問題・解説などのコンテンツの複製・転載・再配布、アカウントの共有・譲渡、本サービスの運営を妨げる行為を禁止します。</p>
+                <h3>第5条（サービスの変更・停止）</h3>
+                <p>運営者は、保守や不具合対応のため、事前の通知なく本サービスの内容を変更し、または一時的に停止することがあります。</p>
+                <h3>第6条（免責）</h3>
+                <p>本サービスは学習を支援するものであり、検定試験の合格を保証するものではありません。</p>
+                <h3>第7条（規約の変更）</h3>
+                <p>運営者は、必要に応じて本規約を変更できるものとし、変更後の規約は本ページに掲載した時点で効力を生じます。</p>
+                <p class="doc-date">制定日：2026年10月21日</p>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/bg3d.js"></script>
+    <script src="js/lp.js"></script>
 </body>
 </html>
